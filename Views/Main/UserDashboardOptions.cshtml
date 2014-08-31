@@ -1,0 +1,180 @@
+﻿@model MVCEngineeringSystemApplication.ViewModels.UserDashboardOptionsModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <title> Engineering System </title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="~/Content/css/style.css" rel="stylesheet" />
+        <link href="~/Content/css/smartadmin-production.min.css" rel="stylesheet" />
+        <link href="~/Content/css/smartadmin-skins.min.css" rel="stylesheet" />
+        <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="~/Content/js/charts/highcharts.js"></script>
+    </head>
+    
+    <body class="">
+        <header id="header">
+            <div id="logo-group">
+                <span class="logo-placeholder">MVC Engineering System v0.1</span>
+            </div>
+
+        </header>
+        <aside id="left-panel">
+
+            <div class="login-info">
+                <span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
+					
+                    <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+                        <span>
+                            @Model.UserName
+                        </span>
+                        <i class="fa fa-angle-down"></i>
+                    </a> 
+					
+                </span>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Index")">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("UserDashboardOptions")">Options</a>    
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <!-- END NAVIGATION -->
+
+        <!-- MAIN PANEL -->
+        <div id="main" role="main">
+
+            <!-- RIBBON -->
+            <div id="ribbon">
+    
+                <span class="ribbon-button-alignment"> 
+                    <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true">
+                        <i class="fa fa-refresh"></i>
+                    </span> 
+                </span>
+
+                <!-- breadcrumb -->
+                <ol class="breadcrumb">
+                    <li>Home</li>
+                    <li>User Options</li>
+                </ol>
+
+            </div>
+            <!-- END RIBBON -->
+
+            <!-- MAIN CONTENT -->
+            <div id="content">
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+                        <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i> Home > <span>User Options</span></h1>
+                    </div>
+                </div>
+                <div>
+                    <div class="alert alert-info alert-block">
+                        <h4 class="alert-heading">
+                            Dashboard personalisation
+                        </h4>
+                        <p>
+                            Please configure the dashboard to suit your personal preference.
+                        </p>
+                    </div>
+                
+                    <div class="jarviswidget jarviswidget-sortable" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" role="widget" style="">
+                        <header role="heading">
+                            <h2>
+                                Configuration
+                            </h2>
+                        </header>
+                        <div role="content">
+                            Dashboard chart:
+                            <select id="chart-selection" class="select2-container user-options-margin">
+                                <option value="2">Absolute Pressure</option>
+                                <option value="1">Oil Volume & Sea Pressure and Temperature</option>
+                                <option value="3">Real time data</option>
+                            </select>
+                
+                            <div>
+                                <span>
+                                    Display Engineering Pagination Control
+                                </span>    
+                                <span>
+                                    <input type="checkbox" />
+                                </span>
+                            </div>
+                
+                            <div>
+                                <button id="save-preferences">Save</button>    
+                            </div>  
+
+                        </div>            
+                    </div> 
+                </div>
+
+            </div>
+        </div>
+        <!-- END MAIN PANEL -->
+
+        <!-- PAGE FOOTER -->
+        <div class="page-footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <span class="txt-color-white">CredoSoft Engineering System</span>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE FOOTER -->
+    </body>
+    
+    
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Engineering System</h4>
+          </div>
+          <div class="modal-body">
+            Your changes have been successfully saved!
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+</html>
+
+<script>
+    $("#save-preferences").click(function () {
+        var selectedChart = $("#chart-selection option:selected").val();
+        $.ajax({
+            url: '@Url.Action("UpdateUserDashboardSettings")',
+            data: { chartId: selectedChart },
+            success: function(data) {
+                if (data.success) {
+                    $("#myModal").modal('show');
+                }
+            }
+        });
+    });
+</script>

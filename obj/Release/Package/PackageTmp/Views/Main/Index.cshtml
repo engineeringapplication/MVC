@@ -1,0 +1,383 @@
+﻿@model MVCEngineeringSystemApplication.ViewModels.MainViewModel
+@{
+         Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <title> Engineering System </title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="~/Content/css/style.css" rel="stylesheet" />
+        <link href="~/Content/css/smartadmin-production.min.css" rel="stylesheet" />
+        <link href="~/Content/css/smartadmin-skins.min.css" rel="stylesheet" />
+        <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script src="~/Content/js/charts/highcharts.js"></script>
+    </head>
+    
+    <body class="">
+		<header id="header">
+			<div id="logo-group">
+			    <span class="logo-placeholder">MVC Engineering System v0.1</span>
+			</div>
+
+		</header>
+		<aside id="left-panel">
+            <div class="login-info">
+				<span>
+					<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+						<span>
+							@Model.Username
+						</span>
+						<i class="fa fa-angle-down"></i>
+					</a> 
+				</span>
+			</div>
+			<nav>
+			    <ul>
+			        @foreach (var navigation in Model.UserNavigation)
+			        {
+			            <li>
+			                @if (navigation.LinkDescription == "Dashboard")
+			                {
+			                    <a href="@Url.Action("Index")">@navigation.LinkDescription</a>
+			                }
+			                else
+			                {
+			                    <a href="@Url.Action("UserDashboardOptions")">@navigation.LinkDescription</a>
+			                }
+			               
+			            </li>
+			        }
+			    </ul>
+			</nav>
+		</aside>
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->
+		<div id="main" role="main">
+
+			<!-- RIBBON -->
+			<div id="ribbon">
+
+				<span class="ribbon-button-alignment"> 
+					<span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true">
+						<i class="fa fa-refresh"></i>
+					</span> 
+				</span>
+
+				<!-- breadcrumb -->
+				<ol class="breadcrumb">
+				    <li>Home</li>
+                    <li>Dashboard</li>
+				</ol>
+
+			</div>
+			<!-- END RIBBON -->
+
+			<!-- MAIN CONTENT -->
+			<div id="content">
+
+				<div class="row">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+						<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i> Dashboard <span>> My Dashboard</span></h1>
+					</div>
+				</div>
+				<!-- widget grid -->
+				<section id="widget-grid" class="">
+					<div class="row">
+						<article class="col-sm-12">
+							<div class="jarviswidget" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+							    <header role="heading">
+								    <h2>Real time data</h2>
+								    <span class="widget-icon">
+								        <i class="fa fa-bar-chart-o"></i>
+								    </span>
+							    </header>
+							    <div class="widget-body">
+                                    <div id="chart1-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+							    </div>
+					        </div>
+						</article>
+					</div>
+				</section>
+                
+                @Html.Partial("_PaginationControl", Model.PaginationViewModel)
+
+			</div>
+		</div>
+
+		<div class="page-footer">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<span class="txt-color-white">CredoSoft Engineering System</span>
+				</div>
+			</div>
+		</div>
+	
+	</body>
+
+</html>
+
+<script>
+    $(function () {
+
+        var chartToDisplay = '@Model.UserDashboardPreference.DashboardOption.Description';
+        var chartTypes = {
+            Guage: "Guages",
+            Bar: "Bar",
+            Line: "Line",
+            RealTime: "Realtime"
+        };
+
+        switch (chartToDisplay) {
+            case chartTypes.Bar:
+                BarAndLine();
+                break;
+
+            case chartTypes.Guage:
+                break;
+
+            case chartTypes.Line:
+                LineChart();
+                break;
+
+            case chartTypes.RealTime:
+                RealTime();
+                break;
+        }
+
+    });
+
+    function LineChart() {
+        
+        $('#chart1-container').highcharts({
+            title: {
+                text: 'Absolute Pressure',
+                x: -20 //center
+            },
+            xAxis: {
+                categories: ['12am', '2am', '4am', '6am', '8am', '10am', "12pm", "2pm", '4pm', '6pm', '10pm']
+            },
+            yAxis: {
+                title: {
+                    text: 'Pascals (Pa)'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                valueSuffix: 'Pascals (Pa)'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: 'Valve 1',
+                data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+            }, {
+                name: 'Valve 2',
+                data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+            }, {
+                name: 'Valve 3',
+                data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+            }, {
+                name: 'Valve 4',
+                data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+            }]
+        });
+    }
+    
+    function BarAndLine() {
+        $('#chart1-container').highcharts({
+            chart: {
+                zoomType: 'xy'
+            },
+            title: {
+                text: 'Amount of Oil drilled per Rig, sea level pressure and temperature '
+            },
+            xAxis: [{
+                categories: ['Rig 1', 'Rig 2', 'Rig 3', 'Rig 4', 'Rig 5', 'Rig 6',
+                    'Rig 7', 'Rig 8', 'Rig 9', 'Rig 10', 'Rig 11', 'Rig 12']
+            }],
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    format: '{value}°C',
+                    style: {
+                        color: Highcharts.getOptions().colors[2]
+                    }
+                },
+                title: {
+                    text: 'Temperature',
+                    style: {
+                        color: Highcharts.getOptions().colors[2]
+                    }
+                },
+                opposite: true
+
+            }, { // Secondary yAxis
+                gridLineWidth: 0,
+                title: {
+                    text: 'Oil drilled',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                labels: {
+                    format: '{value} gallons',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                }
+
+            }, { // Tertiary yAxis
+                gridLineWidth: 0,
+                title: {
+                    text: 'Sea-Level Pressure',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                },
+                labels: {
+                    format: '{value} mb',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                },
+                opposite: true
+            }],
+            tooltip: {
+                shared: true
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
+                verticalAlign: 'top',
+                y: 80,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+            },
+            series: [{
+                name: 'Oil drilled',
+                type: 'column',
+                yAxis: 1,
+                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+                tooltip: {
+                    valueSuffix: ' mm'
+                }
+
+            }, {
+                name: 'Sea-Level Pressure',
+                type: 'spline',
+                yAxis: 2,
+                data: [1016, 1016, 1015.9, 1015.5, 1012.3, 1009.5, 1009.6, 1010.2, 1013.1, 1016.9, 1018.2, 1016.7],
+                marker: {
+                    enabled: false
+                },
+                dashStyle: 'shortdot',
+                tooltip: {
+                    valueSuffix: ' mb'
+                }
+
+            }, {
+                name: 'Temperature',
+                type: 'spline',
+                data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+                tooltip: {
+                    valueSuffix: ' °C'
+                }
+            }]
+        });
+    }
+
+    function RealTime() {
+        Highcharts.setOptions({
+            global: {
+                useUTC: false
+            }
+        });
+
+        $('#chart1-container').highcharts({
+            chart: {
+                type: 'spline',
+                animation: Highcharts.svg, // don't animate in old IE
+                marginRight: 10,
+                events: {
+                    load: function () {
+
+                        // set up the updating of the chart each second
+                        var series = this.series[0];
+                        setInterval(function () {
+                            var x = (new Date()).getTime(), // current time
+                                y = Math.random();
+                            series.addPoint([x, y], true, true);
+                        }, 1000);
+                    }
+                }
+            },
+            title: {
+                text: 'Realtime Voltage levels'
+            },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150
+            },
+            yAxis: {
+                title: {
+                    text: 'Volts'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                        Highcharts.numberFormat(this.y, 2);
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            series: [{
+                name: 'Voltage level',
+                data: (function () {
+                    // generate an array of random data
+                    var data = [],
+                        time = (new Date()).getTime(),
+                        i;
+
+                    for (i = -19; i <= 0; i += 1) {
+                        data.push({
+                            x: time + i * 1000,
+                            y: Math.random()
+                        });
+                    }
+                    return data;
+                }())
+            }]
+        });
+    }
+
+</script>

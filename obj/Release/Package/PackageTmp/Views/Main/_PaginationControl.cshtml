@@ -1,0 +1,59 @@
+﻿@using System.Data
+@model MVCEngineeringSystemApplication.Models.DataViewModel
+
+      <div class="panel panel-default">
+            <div class="panel-body">
+                <ol class="nav nav-pills">
+                    <li id="level1" class="active">
+                        <a>Level 1</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div id="additionalData"></div>
+        <table class="table table-striped table-bordered table-condensed table-hover">
+            @{int counter = 0; }
+            @foreach (DataRow row in (IEnumerable<DataRow>)Session["PagedItems"])
+            {
+                if (counter == 0)
+                {
+                    foreach (var r in row.Table.Columns)
+                    {
+                        <th>
+                            @r    
+                        </th>
+                    }
+                 
+                    counter++;
+                }
+                <tr>
+                    @foreach (var r in row.ItemArray)
+                    {
+                        <td>
+                            @r
+                        </td>
+                    }
+                </tr>
+            }
+
+        </table>
+<ul class="pagination margin-five-pixels">
+    
+    @for (int i = 0; i < Model.TotalPages; i++)
+    {
+        if (i == Model.PageId)
+        {
+            <li class="active">
+                <a href="http://localhost:1427/Data?pageId=@i">
+                    @i
+                </a>
+            </li>  
+        }
+        else
+        {
+            <li>
+                <a href="http://localhost:1427/Data?pageId=@i">@i</a>
+            </li>  
+        }
+    }
+</ul>

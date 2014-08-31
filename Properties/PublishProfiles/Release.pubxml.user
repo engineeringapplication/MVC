@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\Clients\Conocco Phillips\Release\V0.1</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>08/16/2014 17:38:08</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>08/15/2014 20:22:58</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Mvc.FixedDisplayModes.dll">
+      <publishTime>08/15/2014 20:22:58</publishTime>
+    </File>
+    <File Include="bin/MVCEngineeringSystemApplication.dll">
+      <publishTime>08/31/2014 00:25:10</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>08/15/2014 20:22:57</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.dll">
+      <publishTime>07/09/2013 12:04:48</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>08/15/2014 20:22:59</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.WebRequest.dll">
+      <publishTime>07/09/2013 12:04:48</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>08/15/2014 20:22:58</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>08/15/2014 20:22:59</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>08/15/2014 20:22:59</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>08/15/2014 20:22:58</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>08/15/2014 20:22:58</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>08/15/2014 20:22:58</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>08/15/2014 20:22:58</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>08/15/2014 20:22:58</publishTime>
+    </File>
+    <File Include="Content/css/bootstrap.min.css">
+      <publishTime>08/21/2014 18:34:46</publishTime>
+    </File>
+    <File Include="Content/css/font-awesome.min.css">
+      <publishTime>08/17/2014 18:51:28</publishTime>
+    </File>
+    <File Include="Content/css/invoice.min.css">
+      <publishTime>08/17/2014 18:51:28</publishTime>
+    </File>
+    <File Include="Content/css/lockscreen.min.css">
+      <publishTime>08/17/2014 18:51:28</publishTime>
+    </File>
+    <File Include="Content/css/smartadmin-production.min.css">
+      <publishTime>08/17/2014 18:51:28</publishTime>
+    </File>
+    <File Include="Content/css/smartadmin-rtl.min.css">
+      <publishTime>08/17/2014 18:51:27</publishTime>
+    </File>
+    <File Include="Content/css/smartadmin-skins.min.css">
+      <publishTime>08/17/2014 18:51:28</publishTime>
+    </File>
+    <File Include="Content/css/style.css">
+      <publishTime>08/30/2014 23:21:11</publishTime>
+    </File>
+    <File Include="Content/images/arrow.png">
+      <publishTime>08/15/2014 20:45:35</publishTime>
+    </File>
+    <File Include="Content/images/bg.png">
+      <publishTime>08/15/2014 20:45:40</publishTime>
+    </File>
+    <File Include="Content/images/logo.png">
+      <publishTime>08/18/2014 18:22:10</publishTime>
+    </File>
+    <File Include="Content/js/charts/adapters/standalone-framework.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/adapters/standalone-framework.src.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/highcharts-3d.js">
+      <publishTime>08/27/2014 18:43:41</publishTime>
+    </File>
+    <File Include="Content/js/charts/highcharts-3d.src.js">
+      <publishTime>08/27/2014 18:43:41</publishTime>
+    </File>
+    <File Include="Content/js/charts/highcharts-all.js">
+      <publishTime>08/30/2014 22:05:29</publishTime>
+    </File>
+    <File Include="Content/js/charts/highcharts-more.js">
+      <publishTime>08/27/2014 18:43:42</publishTime>
+    </File>
+    <File Include="Content/js/charts/highcharts-more.src.js">
+      <publishTime>08/27/2014 18:43:42</publishTime>
+    </File>
+    <File Include="Content/js/charts/highcharts.js">
+      <publishTime>08/30/2014 22:06:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/highcharts.src.js">
+      <publishTime>08/27/2014 18:43:41</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/canvas-tools.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/canvas-tools.src.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/data.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/data.src.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/drilldown.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/drilldown.src.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/exporting.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/exporting.src.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/funnel.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/funnel.src.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/heatmap.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/heatmap.src.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/no-data-to-display.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/no-data-to-display.src.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/solid-gauge.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/modules/solid-gauge.src.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/themes/dark-blue.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/themes/dark-green.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/themes/dark-unica.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/themes/gray.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/themes/grid-light.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/themes/grid.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/themes/sand-signika.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/charts/themes/skies.js">
+      <publishTime>08/27/2014 18:44:50</publishTime>
+    </File>
+    <File Include="Content/js/main.js">
+      <publishTime>08/30/2014 14:45:01</publishTime>
+    </File>
+    <File Include="EngineeringModel.edmx.diagram">
+      <publishTime>08/30/2014 16:22:53</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>08/15/2014 20:22:49</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>08/16/2014 17:38:08</publishTime>
+    </File>
+    <File Include="Views/Authorise/Login.cshtml">
+      <publishTime>08/23/2014 14:36:31</publishTime>
+    </File>
+    <File Include="Views/Main/Index.cshtml">
+      <publishTime>08/31/2014 00:12:52</publishTime>
+    </File>
+    <File Include="Views/Main/UserDashboardOptions.cshtml">
+      <publishTime>08/31/2014 00:11:44</publishTime>
+    </File>
+    <File Include="Views/Main/_PaginationControl.cshtml">
+      <publishTime>08/30/2014 14:41:51</publishTime>
+    </File>
+    <File Include="Views/Navigation/Navigation.cshtml">
+      <publishTime>08/23/2014 11:01:09</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>08/31/2014 00:29:23</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>08/15/2014 20:22:49</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>08/23/2014 14:35:13</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>08/31/2014 00:27:39</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

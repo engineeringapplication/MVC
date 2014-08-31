@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EngineeringSystemModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="EngineeringSystemModelStoreContainer">
+    <EntitySet Name="DashboardOptions" EntityType="EngineeringSystemModel.Store.DashboardOptions" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Roles" EntityType="EngineeringSystemModel.Store.Roles" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="UserDashboardOptions" EntityType="EngineeringSystemModel.Store.UserDashboardOptions" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="UserRoles" EntityType="EngineeringSystemModel.Store.UserRoles" store:Type="Tables" store:Schema="dbo" store:Name="UserRoles" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
+      <DefiningQuery>SELECT 
+      [UserRoles].[UserRoleId] AS [UserRoleId], 
+      [UserRoles].[UserId] AS [UserId], 
+      [UserRoles].[RoleId] AS [RoleId]
+      FROM [dbo].[UserRoles] AS [UserRoles]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Users" EntityType="EngineeringSystemModel.Store.Users" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <AssociationSet Name="FK__UserDashb__UserD__267ABA7A" Association="EngineeringSystemModel.Store.FK__UserDashb__UserD__267ABA7A">
+      <End Role="DashboardOptions" EntitySet="DashboardOptions" />
+      <End Role="UserDashboardOptions" EntitySet="UserDashboardOptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserDashb__UserI__25869641" Association="EngineeringSystemModel.Store.FK__UserDashb__UserI__25869641">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserDashboardOptions" EntitySet="UserDashboardOptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRoles__RoleI__1BFD2C07" Association="EngineeringSystemModel.Store.FK__UserRoles__RoleI__1BFD2C07">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRoles__UserI__1B0907CE" Association="EngineeringSystemModel.Store.FK__UserRoles__UserI__1B0907CE">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="DashboardOptions">
+    <Key>
+      <PropertyRef Name="DashboardOptionsId" />
+    </Key>
+    <Property Name="DashboardOptionsId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserDashboardOptions">
+    <Key>
+      <PropertyRef Name="UserDashboardOptionsID" />
+    </Key>
+    <Property Name="UserDashboardOptionsID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="UserDashboardOption" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'EngineeringSystem.dbo.UserRoles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="UserRoles">
+    <Key>
+      <PropertyRef Name="UserRoleId" />
+    </Key>
+    <Property Name="UserRoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="RoleId" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="varchar" MaxLength="70" />
+    <Property Name="Password" Type="varchar" MaxLength="30" />
+    <Property Name="Forename" Type="varchar" MaxLength="35" />
+    <Property Name="Surname" Type="varchar" MaxLength="35" />
+  </EntityType>
+  <Association Name="FK__UserDashb__UserD__267ABA7A">
+    <End Role="DashboardOptions" Type="EngineeringSystemModel.Store.DashboardOptions" Multiplicity="0..1" />
+    <End Role="UserDashboardOptions" Type="EngineeringSystemModel.Store.UserDashboardOptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DashboardOptions">
+        <PropertyRef Name="DashboardOptionsId" />
+      </Principal>
+      <Dependent Role="UserDashboardOptions">
+        <PropertyRef Name="UserDashboardOption" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserDashb__UserI__25869641">
+    <End Role="Users" Type="EngineeringSystemModel.Store.Users" Multiplicity="0..1" />
+    <End Role="UserDashboardOptions" Type="EngineeringSystemModel.Store.UserDashboardOptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserDashboardOptions">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRoles__RoleI__1BFD2C07">
+    <End Role="Roles" Type="EngineeringSystemModel.Store.Roles" Multiplicity="0..1" />
+    <End Role="UserRoles" Type="EngineeringSystemModel.Store.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRoles__UserI__1B0907CE">
+    <End Role="Users" Type="EngineeringSystemModel.Store.Users" Multiplicity="0..1" />
+    <End Role="UserRoles" Type="EngineeringSystemModel.Store.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

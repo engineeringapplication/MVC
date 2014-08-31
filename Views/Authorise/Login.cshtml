@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<head>
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/main.js"></script>
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Login to the MVC Engineering Application</title>
+</head>
+<body>
+    <section class="container">
+        <div class="login">
+            <h1>Login to Engineering System</h1>
+            <form>
+                <p><input id="username" type="text" name="login" placeholder="Username or Email"></p>
+                <p><input id="password" type="password" name="password" placeholder="Password"></p>
+                <p class="remember_me">
+                    <label>
+                        <input type="checkbox" name="remember_me" id="remember_me">
+                        Remember me on this computer
+                    </label>
+                </p>
+                <p class="submit"><a id="login" class="btn btn-default" name="commit" value="Login">Login</a></p>
+            </form>
+        </div>
+
+        <div class="login-help">
+            <p>Forgot your password? <a>Click here to reset it</a>.</p>
+        </div>
+    </section>
+</body>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var loginUrl = '@Url.Action("Authenticate")';
+        Initialise(loginUrl);
+    });
+</script>

@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EngineeringSystemModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="EngineeringSystemEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Roles" EntityType="EngineeringSystemModel.Role" />
+    <EntitySet Name="UserRoles" EntityType="EngineeringSystemModel.UserRole" />
+    <EntitySet Name="Users" EntityType="EngineeringSystemModel.User" />
+    <AssociationSet Name="FK__UserRoles__RoleI__1BFD2C07" Association="EngineeringSystemModel.FK__UserRoles__RoleI__1BFD2C07">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRoles__UserI__1B0907CE" Association="EngineeringSystemModel.FK__UserRoles__UserI__1B0907CE">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <EntitySet Name="DashboardOptions" EntityType="EngineeringSystemModel.DashboardOption" />
+    <EntitySet Name="UserDashboardOptions" EntityType="EngineeringSystemModel.UserDashboardOption" />
+    <AssociationSet Name="FK__UserDashb__UserD__267ABA7A" Association="EngineeringSystemModel.FK__UserDashb__UserD__267ABA7A">
+      <End Role="DashboardOption" EntitySet="DashboardOptions" />
+      <End Role="UserDashboardOption" EntitySet="UserDashboardOptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserDashb__UserI__25869641" Association="EngineeringSystemModel.FK__UserDashb__UserI__25869641">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserDashboardOption" EntitySet="UserDashboardOptions" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="UserRoles" Relationship="EngineeringSystemModel.FK__UserRoles__RoleI__1BFD2C07" FromRole="Roles" ToRole="UserRoles" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleId" />
+    </Key>
+    <Property Name="UserRoleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="RoleId" Type="Int32" />
+    <NavigationProperty Name="Role" Relationship="EngineeringSystemModel.FK__UserRoles__RoleI__1BFD2C07" FromRole="UserRoles" ToRole="Roles" />
+    <NavigationProperty Name="User" Relationship="EngineeringSystemModel.FK__UserRoles__UserI__1B0907CE" FromRole="UserRoles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="70" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Forename" Type="String" MaxLength="35" Unicode="false" FixedLength="false" />
+    <Property Name="Surname" Type="String" MaxLength="35" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="UserRoles" Relationship="EngineeringSystemModel.FK__UserRoles__UserI__1B0907CE" FromRole="Users" ToRole="UserRoles" />
+    <NavigationProperty Name="UserDashboardOptions" Relationship="EngineeringSystemModel.FK__UserDashb__UserI__25869641" FromRole="User" ToRole="UserDashboardOption" />
+  </EntityType>
+  <Association Name="FK__UserRoles__RoleI__1BFD2C07">
+    <End Role="Roles" Type="EngineeringSystemModel.Role" Multiplicity="0..1" />
+    <End Role="UserRoles" Type="EngineeringSystemModel.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRoles__UserI__1B0907CE">
+    <End Role="Users" Type="EngineeringSystemModel.User" Multiplicity="0..1" />
+    <End Role="UserRoles" Type="EngineeringSystemModel.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DashboardOption">
+    <Key>
+      <PropertyRef Name="DashboardOptionsId" />
+    </Key>
+    <Property Type="Int32" Name="DashboardOptionsId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserDashboardOptions" Relationship="EngineeringSystemModel.FK__UserDashb__UserD__267ABA7A" FromRole="DashboardOption" ToRole="UserDashboardOption" />
+  </EntityType>
+  <EntityType Name="UserDashboardOption">
+    <Key>
+      <PropertyRef Name="UserDashboardOptionsID" />
+    </Key>
+    <Property Type="Int32" Name="UserDashboardOptionsID" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Type="Int32" Name="UserId" />
+    <Property Type="Int32" Name="UserDashboardOption1" />
+    <NavigationProperty Name="DashboardOption" Relationship="EngineeringSystemModel.FK__UserDashb__UserD__267ABA7A" FromRole="UserDashboardOption" ToRole="DashboardOption" />
+    <NavigationProperty Name="User" Relationship="EngineeringSystemModel.FK__UserDashb__UserI__25869641" FromRole="UserDashboardOption" ToRole="User" />
+  </EntityType>
+  <Association Name="FK__UserDashb__UserD__267ABA7A">
+    <End Type="EngineeringSystemModel.DashboardOption" Role="DashboardOption" Multiplicity="0..1" />
+    <End Type="EngineeringSystemModel.UserDashboardOption" Role="UserDashboardOption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DashboardOption">
+        <PropertyRef Name="DashboardOptionsId" />
+      </Principal>
+      <Dependent Role="UserDashboardOption">
+        <PropertyRef Name="UserDashboardOption1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserDashb__UserI__25869641">
+    <End Type="EngineeringSystemModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="EngineeringSystemModel.UserDashboardOption" Role="UserDashboardOption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserDashboardOption">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
